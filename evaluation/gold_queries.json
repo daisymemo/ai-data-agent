@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "gold_sql": "SELECT SUM(amount) AS transaction_amount FROM transactions WHERE status = 'SUCCESS'"
+  },
+  {
+    "id": 2,
+    "gold_sql": "SELECT c.customer_level, SUM(t.amount) AS transaction_amount FROM transactions t JOIN customers c ON t.customer_id = c.customer_id WHERE t.status = 'SUCCESS' GROUP BY c.customer_level ORDER BY c.customer_level"
+  },
+  {
+    "id": 3,
+    "gold_sql": "SELECT c.region, SUM(t.amount) AS transaction_amount FROM transactions t JOIN customers c ON t.customer_id = c.customer_id WHERE t.status = 'SUCCESS' GROUP BY c.region ORDER BY c.region"
+  },
+  {
+    "id": 4,
+    "gold_sql": "SELECT COUNT(DISTINCT customer_id) AS transaction_customer_count FROM transactions WHERE status = 'SUCCESS'"
+  },
+  {
+    "id": 5,
+    "gold_sql": "SELECT SUM(amount) / COUNT(DISTINCT customer_id) AS avg_amount_per_customer FROM transactions WHERE status = 'SUCCESS'"
+  },
+  {
+    "id": 6,
+    "gold_sql": "SELECT p.product_type, SUM(t.amount) AS transaction_amount FROM transactions t JOIN products p ON t.product_id = p.product_id WHERE t.status = 'SUCCESS' GROUP BY p.product_type ORDER BY p.product_type"
+  },
+  {
+    "id": 7,
+    "gold_sql": "SELECT c.customer_level, p.product_type, SUM(t.amount) AS transaction_amount FROM transactions t JOIN customers c ON t.customer_id = c.customer_id JOIN products p ON t.product_id = p.product_id WHERE t.status = 'SUCCESS' GROUP BY c.customer_level, p.product_type ORDER BY c.customer_level, p.product_type"
+  },
+  {
+    "id": 8,
+    "gold_sql": "SELECT SUM(converted) * 1.0 / COUNT(*) AS campaign_conversion_rate FROM campaigns"
+  },
+  {
+    "id": 9,
+    "gold_sql": "SELECT touch_channel, SUM(converted) * 1.0 / COUNT(*) AS campaign_conversion_rate FROM campaigns GROUP BY touch_channel ORDER BY touch_channel"
+  },
+  {
+    "id": 10,
+    "gold_sql": "SELECT campaign_type, SUM(converted) * 1.0 / COUNT(*) AS campaign_conversion_rate FROM campaigns GROUP BY campaign_type ORDER BY campaign_type"
+  },
+  {
+    "id": 11,
+    "gold_sql": "SELECT c.customer_level, SUM(ca.converted) * 1.0 / COUNT(*) AS campaign_conversion_rate FROM campaigns ca JOIN customers c ON ca.customer_id = c.customer_id GROUP BY c.customer_level ORDER BY c.customer_level"
+  },
+  {
+    "id": 12,
+    "gold_sql": "SELECT c.region, SUM(ca.converted) * 1.0 / COUNT(*) AS campaign_conversion_rate FROM campaigns ca JOIN customers c ON ca.customer_id = c.customer_id GROUP BY c.region ORDER BY c.region"
+  },
+  {
+    "id": 13,
+    "gold_sql": "SELECT COUNT(DISTINCT CASE WHEN converted = 1 THEN customer_id END) AS converted_customer_count FROM campaigns"
+  },
+  {
+    "id": 14,
+    "gold_sql": "SELECT touch_channel, SUM(converted) * 1.0 / COUNT(*) AS campaign_conversion_rate FROM campaigns GROUP BY touch_channel ORDER BY campaign_conversion_rate DESC LIMIT 1"
+  }
+]

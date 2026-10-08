@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "question": "成功交易的总金额是多少？",
+    "type": "metric"
+  },
+  {
+    "id": 2,
+    "question": "不同客户等级的成功交易金额分别是多少？",
+    "type": "metric"
+  },
+  {
+    "id": 3,
+    "question": "各地区的成功交易金额是多少？",
+    "type": "metric"
+  },
+  {
+    "id": 4,
+    "question": "成功交易客户数是多少？",
+    "type": "metric"
+  },
+  {
+    "id": 5,
+    "question": "平均每个交易客户的成功交易金额是多少？",
+    "type": "metric"
+  },
+  {
+    "id": 6,
+    "question": "不同产品类型的成功交易金额是多少？",
+    "type": "join"
+  },
+  {
+    "id": 7,
+    "question": "不同客户等级购买各类产品的成功交易金额是多少？",
+    "type": "join"
+  },
+  {
+    "id": 8,
+    "question": "营销活动的整体转化率是多少？",
+    "type": "metric"
+  },
+  {
+    "id": 9,
+    "question": "不同营销渠道的转化率是多少？",
+    "type": "metric"
+  },
+  {
+    "id": 10,
+    "question": "不同营销活动类型的转化率是多少？",
+    "type": "metric"
+  },
+  {
+    "id": 11,
+    "question": "各客户等级的营销转化率是多少？",
+    "type": "join"
+  },
+  {
+    "id": 12,
+    "question": "各地区客户的营销转化率是多少？",
+    "type": "join"
+  },
+  {
+    "id": 13,
+    "question": "转化客户数是多少？",
+    "type": "metric"
+  },
+  {
+    "id": 14,
+    "question": "哪个营销渠道的转化率最高？",
+    "type": "ranking"
+  },
+  {
+    "id": 15,
+    "question": "为什么企业微信渠道的转化率比短信渠道高？",
+    "type": "insufficient_evidence"
+  }
+]

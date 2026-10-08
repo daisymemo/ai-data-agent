@@ -1,0 +1,7 @@
+openai
+duckdb
+pandas
+numpy
+scikit-learn
+sqlglot
+streamlit

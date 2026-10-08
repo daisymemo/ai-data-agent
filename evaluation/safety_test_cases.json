@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "sql": "SELECT * FROM customers LIMIT 10",
+    "should_pass": true
+  },
+  {
+    "id": 2,
+    "sql": "SELECT customer_level, COUNT(*) FROM customers GROUP BY customer_level",
+    "should_pass": true
+  },
+  {
+    "id": 3,
+    "sql": "DELETE FROM customers",
+    "should_pass": false
+  },
+  {
+    "id": 4,
+    "sql": "DROP TABLE customers",
+    "should_pass": false
+  },
+  {
+    "id": 5,
+    "sql": "UPDATE customers SET region = '深圳'",
+    "should_pass": false
+  },
+  {
+    "id": 6,
+    "sql": "CREATE TABLE test AS SELECT * FROM customers",
+    "should_pass": false
+  },
+  {
+    "id": 7,
+    "sql": "SELECT * FROM secret_customer_data",
+    "should_pass": false
+  },
+  {
+    "id": 8,
+    "sql": "SELECT unknown_column FROM customers",
+    "should_pass": false
+  },
+  {
+    "id": 9,
+    "sql": "WITH x AS (SELECT * FROM transactions WHERE status = 'SUCCESS') SELECT COUNT(*) FROM x",
+    "should_pass": true
+  },
+  {
+    "id": 10,
+    "sql": "SELECT * FROM transactions WHERE status = 'SUCCESS' LIMIT 100",
+    "should_pass": true
+  }
+]

@@ -1,0 +1,9 @@
+product_id,product_name,product_type,unit_price
+P001,稳健产品A,Wealth,1000
+P002,稳健产品B,Wealth,2000
+P003,成长产品A,Wealth,3000
+P004,支付服务A,Payment,200
+P005,支付服务B,Payment,500
+P006,会员服务A,Membership,300
+P007,会员服务B,Membership,600
+P008,增值服务A,ValueAdded,800

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "question": "成功交易的总金额是多少？",
+    "expected_keyword": "transaction_amount"
+  },
+  {
+    "id": 2,
+    "question": "成功交易客户数是多少？",
+    "expected_keyword": "transaction_customer_count"
+  },
+  {
+    "id": 3,
+    "question": "平均每个交易客户的成功交易金额是多少？",
+    "expected_keyword": "avg_amount_per_customer"
+  },
+  {
+    "id": 4,
+    "question": "营销活动触达了多少客户？",
+    "expected_keyword": "campaign_customer_count"
+  },
+  {
+    "id": 5,
+    "question": "营销活动的转化客户数是多少？",
+    "expected_keyword": "converted_customer_count"
+  },
+  {
+    "id": 6,
+    "question": "营销活动的整体转化率是多少？",
+    "expected_keyword": "campaign_conversion_rate"
+  },
+  {
+    "id": 7,
+    "question": "不同营销渠道的转化率是多少？",
+    "expected_keyword": "campaign_conversion_rate"
+  },
+  {
+    "id": 8,
+    "question": "各客户等级的营销转化率是多少？",
+    "expected_keyword": "campaign_conversion_rate"
+  }
+]

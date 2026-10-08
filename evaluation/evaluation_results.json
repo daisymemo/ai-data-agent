@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "question": "成功交易的总金额是多少？",
+    "type": "metric",
+    "sql": "SELECT SUM(amount) AS transaction_amount FROM transactions WHERE status = 'SUCCESS';",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 2,
+    "question": "不同客户等级的成功交易金额分别是多少？",
+    "type": "metric",
+    "sql": "SELECT c.customer_level AS customer_level, SUM(t.amount) AS transaction_amount\nFROM transactions t\nJOIN customers c ON t.customer_id = c.customer_id\nWHERE t.status = 'SUCCESS'\nGROUP BY c.customer_level\nORDER BY transaction_amount DESC;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 3,
+    "question": "各地区的成功交易金额是多少？",
+    "type": "metric",
+    "sql": "SELECT c.region, SUM(t.amount) AS transaction_amount\nFROM transactions t\nJOIN customers c ON t.customer_id = c.customer_id\nWHERE t.status = 'SUCCESS'\nGROUP BY c.region\nORDER BY c.region;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 4,
+    "question": "成功交易客户数是多少？",
+    "type": "metric",
+    "sql": "SELECT COUNT(DISTINCT customer_id) AS transaction_customer_count\nFROM transactions\nWHERE status = 'SUCCESS';",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 5,
+    "question": "平均每个交易客户的成功交易金额是多少？",
+    "type": "metric",
+    "sql": "SELECT SUM(amount) * 1.0 / COUNT(DISTINCT customer_id) AS avg_amount_per_customer\nFROM transactions\nWHERE status = 'SUCCESS';",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 6,
+    "question": "不同产品类型的成功交易金额是多少？",
+    "type": "join",
+    "sql": "SELECT p.product_type, SUM(t.amount) AS transaction_amount\nFROM transactions t\nJOIN products p ON t.product_id = p.product_id\nWHERE t.status = 'SUCCESS'\nGROUP BY p.product_type;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 7,
+    "question": "不同客户等级购买各类产品的成功交易金额是多少？",
+    "type": "join",
+    "sql": "SELECT c.customer_level, p.product_type, SUM(t.amount) AS transaction_amount\nFROM transactions t\nJOIN customers c ON t.customer_id = c.customer_id\nJOIN products p ON t.product_id = p.product_id\nWHERE t.status = 'SUCCESS'\nGROUP BY c.customer_level, p.product_type\nORDER BY c.customer_level, p.product_type;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 8,
+    "question": "营销活动的整体转化率是多少？",
+    "type": "metric",
+    "sql": "SELECT SUM(converted) * 1.0 / COUNT(*) AS campaign_conversion_rate FROM campaigns;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 9,
+    "question": "不同营销渠道的转化率是多少？",
+    "type": "metric",
+    "sql": "SELECT touch_channel, SUM(converted) * 1.0 / COUNT(*) AS conversion_rate\nFROM campaigns\nGROUP BY touch_channel;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 10,
+    "question": "不同营销活动类型的转化率是多少？",
+    "type": "metric",
+    "sql": "SELECT campaign_type,\n       SUM(converted) * 1.0 / COUNT(*) AS campaign_conversion_rate\nFROM campaigns\nGROUP BY campaign_type\nORDER BY campaign_conversion_rate DESC;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 11,
+    "question": "各客户等级的营销转化率是多少？",
+    "type": "join",
+    "sql": "SELECT c.customer_level,\n       SUM(ca.converted) * 1.0 / COUNT(*) AS campaign_conversion_rate\nFROM campaigns ca\nJOIN customers c ON ca.customer_id = c.customer_id\nGROUP BY c.customer_level\nORDER BY c.customer_level;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 12,
+    "question": "各地区客户的营销转化率是多少？",
+    "type": "join",
+    "sql": "SELECT c.region AS region,\n       SUM(cp.converted) * 1.0 / COUNT(*) AS campaign_conversion_rate\nFROM campaigns cp\nJOIN customers c ON cp.customer_id = c.customer_id\nGROUP BY c.region;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 13,
+    "question": "转化客户数是多少？",
+    "type": "metric",
+    "sql": "SELECT COUNT(DISTINCT CASE WHEN converted = 1 THEN customer_id END) AS converted_customer_count\nFROM campaigns;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 14,
+    "question": "哪个营销渠道的转化率最高？",
+    "type": "ranking",
+    "sql": "SELECT touch_channel, SUM(converted) * 1.0 / COUNT(*) AS conversion_rate\nFROM campaigns\nGROUP BY touch_channel\nORDER BY conversion_rate DESC\nLIMIT 1;",
+    "executable": true,
+    "result_correct": true,
+    "error": null
+  },
+  {
+    "id": 15,
+    "question": "为什么企业微信渠道的转化率比短信渠道高？",
+    "type": "insufficient_evidence",
+    "sql": "WITH detail AS (\n    SELECT campaign_type,\n           SUM(CASE WHEN touch_channel = '企业微信' THEN converted ELSE 0 END) * 1.0 / NULLIF(SUM(CASE WHEN touch_channel = '企业微信' THEN 1 ELSE 0 END), 0) AS wechat_work_conversion_rate,\n           SUM(CASE WHEN touch_channel = '短信' THEN converted ELSE 0 END) * 1.0 / NULLIF(SUM(CASE WHEN touch_channel = '短信' THEN 1 ELSE 0 END), 0) AS sms_conversion_rate,\n           SUM(CASE WHEN touch_channel = '企业微信' THEN 1 ELSE 0 END) AS wechat_work_touches,\n           SUM(CASE WHEN touch_channel = '短信' THEN 1 ELSE 0 END) AS sms_touches\n    FROM campaigns\n    WHERE touch_channel IN ('企业微信', '短信')\n    GROUP BY campaign_type\n),\ntotal AS (\n    SELECT '总体' AS campaign_type,\n           SUM(CASE WHEN touch_channel = '企业微信' THEN converted ELSE 0 END) * 1.0 / NULLIF(SUM(CASE WHEN touch_channel = '企业微信' THEN 1 ELSE 0 END), 0) AS wechat_work_conversion_rate,\n           SUM(CASE WHEN touch_channel = '短信' THEN converted ELSE 0 END) * 1.0 / NULLIF(SUM(CASE WHEN touch_channel = '短信' THEN 1 ELSE 0 END), 0) AS sms_conversion_rate,\n           SUM(CASE WHEN touch_channel = '企业微信' THEN 1 ELSE 0 END) AS wechat_work_touches,\n           SUM(CASE WHEN touch_channel = '短信' THEN 1 ELSE 0 END) AS sms_touches\n    FROM campaigns\n    WHERE touch_channel IN ('企业微信', '短信')\n)\nSELECT * FROM total\nUNION ALL\nSELECT * FROM detail\nORDER BY campaign_type;",
+    "executable": true,
+    "result_correct": null,
+    "error": null
+  }
+]
