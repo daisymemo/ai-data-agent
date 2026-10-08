@@ -2,6 +2,8 @@ from src.sql_validator import validate_sql
 import duckdb
 import os
 from openai import OpenAI
+from dotenv import load_dotenv
+load_dotenv()
 from src.context_builder import get_database_schema
 from src.retriever import retrieve
 
