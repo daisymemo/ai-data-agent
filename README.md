@@ -104,30 +104,49 @@ WHERE status = 'SUCCESS';
 
 ## 7. 本地运行
 
-### 安装依赖
+### 1. 克隆项目
 
 ```bash
+git clone https://github.com/daisymemo/ai-data-agent.git
+cd ai-data-agent
+```
+
+### 2. 创建虚拟环境并安装依赖
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 配置 API Key
+### 3. 配置 API Key
 
-```bash
-export DEEPSEEK_API_KEY="your_api_key"
+在项目根目录创建 `.env` 文件：
+
+```env
+DEEPSEEK_API_KEY=your_deepseek_api_key
 ```
 
-### 初始化数据库
+项目通过 `python-dotenv` 自动读取环境变量。
+
+请勿将真实 API Key 提交到 GitHub。
+
+### 4. 初始化模拟数据
 
 ```bash
 python -m src.generate_data
 python -m src.setup_database
 ```
 
-### 启动应用
+### 5. 启动应用
 
 ```bash
 streamlit run app.py
 ```
+
+浏览器访问：
+
+http://localhost:8501
 
 ## 8. 项目边界与后续优化
 
